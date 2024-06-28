@@ -1,0 +1,13 @@
+{
+  "prettier.bracketSpacing": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.printWidth": 120,
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "all",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true
+}
