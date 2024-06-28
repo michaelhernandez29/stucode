@@ -52,16 +52,6 @@ module.exports = [
           },
         },
       ],
-      'sort-imports': [
-        'error',
-        {
-          allowSeparatedGroups: false,
-          ignoreCase: false,
-          ignoreDeclarationSort: false,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-        },
-      ],
       'sort-vars': 'error',
       'jsdoc/check-alignment': 'error',
       'jsdoc/check-param-names': 'error',
