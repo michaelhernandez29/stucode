@@ -21,7 +21,7 @@
     "test": "node ./__tests__/api.test.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "start": "cross-env nodemon --env-file=.env src/index.js"
+    "start": "cross-env nodemon --env-file=.env --inspect=9242 src/index.js"
   },
   "bugs": {
     "url": "https://github.com/michaelhernandez29/stucode/issues"

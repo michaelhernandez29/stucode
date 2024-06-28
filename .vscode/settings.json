@@ -9,5 +9,12 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
-  "editor.formatOnType": true
+  "editor.formatOnType": true,
+  "editor.rulers": [120],
+  "yaml.disableAdditionalProperties": true,
+  "yaml.format.printWidth": 120,
+  "yaml.format.singleQuote": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
