@@ -17,6 +17,7 @@
     "npm": ">=10.x"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "lerna run lint"
   }
 }
