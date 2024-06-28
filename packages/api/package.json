@@ -19,7 +19,8 @@
   },
   "scripts": {
     "test": "node ./__tests__/api.test.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "bugs": {
     "url": "https://github.com/michaelhernandez29/stucode/issues"
