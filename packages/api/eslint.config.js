@@ -32,7 +32,6 @@ module.exports = [
           },
         },
       ],
-      complexity: ['error', 3],
       'consistent-return': 'error',
       curly: 'error',
       'default-param-last': 'error',
