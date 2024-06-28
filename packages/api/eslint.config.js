@@ -1,14 +1,14 @@
-import globals from 'globals';
-import jsdoc from 'eslint-plugin-jsdoc';
-import pluginJs from '@eslint/js';
+const globals = require('globals');
+const jsdoc = require('eslint-plugin-jsdoc');
+const pluginJs = require('@eslint/js');
 
-export default [
+module.exports = [
   {
     files: ['**/*.js'],
     plugins: {
       jsdoc: jsdoc,
     },
-    languageOptions: { sourceType: 'module' },
+    languageOptions: { sourceType: 'commonjs' },
     rules: {
       eqeqeq: ['error', 'always'],
       'no-unused-vars': 'error',
