@@ -23,6 +23,35 @@ const config = convict({
     default: 3650,
     env: 'PORT',
   },
+  db: {
+    sequelize: {
+      database: {
+        doc: 'The database name',
+        format: '*',
+        default: 'stucode',
+        env: 'DB_POSTGRES_DATABASE',
+      },
+      username: {
+        doc: 'The database username',
+        format: '*',
+        default: 'stucode',
+        env: 'DB_POSTGRES_USERNAME',
+      },
+      password: {
+        doc: 'The database password',
+        format: '*',
+        default: 'stucode',
+        env: 'DB_POSTGRES_PASSWORD',
+        sensitive: true,
+      },
+      host: {
+        doc: 'The database host',
+        format: '*',
+        default: 'localhost',
+        env: 'DB_POSTGRES_HOST',
+      },
+    },
+  },
 });
 
 config.validate({ allowed: 'strict' });

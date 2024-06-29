@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const logger = require('./helpers/logger');
 const pinoHttp = require('pino-http');
 
+require('./db/dbPostgres');
+
 const corsOptions = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
