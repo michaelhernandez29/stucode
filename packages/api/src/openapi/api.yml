@@ -26,9 +26,299 @@ info:
     We're excited to have you join the StuCode community and explore the possibilities of our API. Happy coding!
 servers:
   - url: /v1
+tags:
+  - name: 🧑‍💻 Users
+    description: Endpoints related to user management, including profiles and authentication.
 paths:
-  /test:
-    get:
+  /users/register:
+    post:
+      tags:
+        - 🧑‍💻 Users
+      summary: Register a new user
+      description: This endpoint allows new users to register.
+      x-eov-operation-handler: userController
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The first name of the user.
+                  example: John
+                lastname:
+                  type: string
+                  description: The last name of the user.
+                  example: Doe
+                email:
+                  type: string
+                  description: The email address of the user. This will be used for login and communication purposes.
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  description: The password for the user account. It should be at least 8 characters long and include a mix of letters and numbers.
+                  example: SecurePass123
+                job:
+                  type: string
+                  description: The user's job title or position.
+                  example: Global Accounts Engineer
+                biography:
+                  type: string
+                  description: A brief description or biography of the user.
+                  example: JavaScript advocate, veteran
+              required:
+                - name
+                - lastname
+                - email
+                - password
+              additionalProperties: false
       responses:
-        '200':
-          description: OK
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        409:
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+components:
+  schemas:
+    BadRequest:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: HTTP status code indicating a bad request error.
+          default: 400
+        message:
+          type: string
+          description: Descriptive message of the error.
+          default: Bad Request
+        errorCode:
+          type: string
+          enum:
+            - BAD_REQUEST
+          description: >
+            Possible error codes:
+              
+            - `BAD_REQUEST`: Indicates a bad request error.'
+      required:
+        - statusCode
+        - message
+        - errorCode
+      additionalProperties: false
+    Unauthorized:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: HTTP status code indicating an unauthorized error.
+          default: 401
+        message:
+          type: string
+          description: Descriptive message of the error.
+          default: Unauthorized
+        errorCode:
+          type: string
+          enum:
+            - UNAUTHORIZED
+          description: >
+            Possible error codes:
+              
+            - `UNAUTHORIZED`: Indicates an unauthorized error.'
+      required:
+        - statusCode
+        - message
+        - errorCode
+      additionalProperties: false
+    Forbidden:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: HTTP status code indicating a forbidden error.
+          default: 403
+        message:
+          type: string
+          description: Descriptive message of the error.
+          default: Forbidden
+        errorCode:
+          type: string
+          enum:
+            - FORBIDDEN
+          description: >
+            Possible error codes:
+              
+            - `FORBIDDEN`: Indicates a forbidden error.'
+      required:
+        - statusCode
+        - message
+        - errorCode
+      additionalProperties: false
+    NotFound:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: HTTP status code indicating a not found error.
+          default: 404
+        message:
+          type: string
+          description: Descriptive message of the error.
+          default: Not Found
+        errorCode:
+          type: string
+          enum:
+            - NOT_FOUND
+          description: >
+            Possible error codes:
+              
+            - `NOT_FOUND`: Indicates a not found error.'
+      required:
+        - statusCode
+        - message
+        - errorCode
+      additionalProperties: false
+    Conflict:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: HTTP status code indicating a conflict error.
+          default: 409
+        message:
+          type: string
+          description: Descriptive message of the error.
+          default: Conflict
+        errorCode:
+          type: string
+          enum:
+            - CONFLICT
+          description: >
+            Possible error codes:
+              
+            - `CONFLICT`: Indicates a conflict error.'
+      required:
+        - statusCode
+        - message
+        - errorCode
+      additionalProperties: false
+    InternalServerError:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int64
+          description: HTTP status code indicating an error.
+          default: 500
+        message:
+          type: string
+          description: Descriptive message of the error.
+          default: Internal Server Error
+        errorCode:
+          type: string
+          enum:
+            - INTERNAL_SERVER_ERROR
+          description: >
+            Possible error codes:
+              
+            - `INTERNAL_SERVER_ERROR`: Indicates an error.'
+      required:
+        - statusCode
+        - message
+        - errorCode
+      additionalProperties: false
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The user's id.
+          example: 123e4567-e89b-12d3-a456-426614174000
+        name:
+          type: string
+          description: The user's first name.
+          example: John
+        lastname:
+          type: string
+          description: The user's last name.
+          example: Doe
+        email:
+          type: string
+          description: The user's email address.
+          example: john@example.com
+        job:
+          type: string
+          description: The user's job title or position.
+          example: Global Accounts Engineer
+        biography:
+          type: string
+          description: A brief description or biography of the user.
+          example: JavaScript advocate, veteran
+        createdAt:
+          type: string
+          format: date-time
+          description: The date the user was created.
+          example: 2023-07-11T13:45:30Z
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date the user was last updated.
+          example: 2024-07-11T13:45:30Z
+        image:
+          type: string
+          description: The user's logo URL.
+          example: https://example.com/images/user.jpg
+      required:
+        - id
+        - name
+        - lastname
+        - email
+        - job
+        - biography
+        - createdAt
+        - updatedAt
+        - image
+      additionalProperties: false

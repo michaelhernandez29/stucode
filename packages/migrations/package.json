@@ -1,0 +1,15 @@
+{
+  "name": "migrations",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Michael Hernandez <michaelhernandezrala@gmail.com>",
+  "homepage": "https://github.com/michaelhernandez29/stucode#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelhernandez29/stucode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michaelhernandez29/stucode/issues"
+  }
+}
