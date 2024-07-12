@@ -29,6 +29,8 @@ servers:
 tags:
   - name: 🧑‍💻 Users
     description: Endpoints related to user management, including profiles and authentication.
+  - name: 📚 Articles
+    description: Operations related to articles.
 paths:
   /users/register:
     post:
@@ -178,6 +180,122 @@ paths:
                     type: string
                     description: Token returned upon successful login.
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        409:
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conflict'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /users/{userId}/articles:
+    post:
+      tags:
+        - 📚 Articles
+      summary: Create a new article for a specific user.
+      description: This endpoint allows to create a new article associated with a specific user identified by `{userId}`.
+      x-eov-operation-handler: articleController
+      operationId: create
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            description: The ID of the user who will own the article.
+            example: 123e4567-e89b-12d3-a456-426614174001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the article.
+                  example: Getting Started with OpenAPI
+                content:
+                  type: string
+                  description: The main content of the article.
+                  example: This article provides an introduction to OpenAPI and its usage.
+                slug:
+                  type: string
+                  description: The SEO-friendly slug for the article.
+                  example: getting-started-with-openapi
+                status:
+                  type: string
+                  description: The status of the article.
+                  enum:
+                    - draft
+                    - published
+                  example: published
+                  default: draft
+                tags:
+                  type: array
+                  items:
+                    type: string
+                    description: A tag associated with the article.
+                  example: [tutorial, api]
+                  default: []
+                userId:
+                  type: string
+                  description: The ID of the user who created the article.
+                  example: 123e4567-e89b-12d3-a456-426614174001
+              required:
+                - title
+                - content
+                - slug
+                - status
+                - userId
+              additionalProperties: false
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    format: int64
+                    description: HTTP status code indicating a successful operation.
+                    default: 201
+                  message:
+                    type: string
+                    description: Descriptive message of the operation.
+                    default: Created
+                  data:
+                    $ref: '#/components/schemas/Article'
         400:
           description: Bad Request
           content:
@@ -417,4 +535,67 @@ components:
         - createdAt
         - updatedAt
         - image
+      additionalProperties: false
+    Article:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the article.
+          example: 123e4567-e89b-12d3-a456-426614174000
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the article was created.
+          example: 2023-07-11T13:45:30Z
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the article was last updated.
+          example: 2024-07-11T13:45:30Z
+        title:
+          type: string
+          description: The title of the article.
+          example: Getting Started with OpenAPI
+        content:
+          type: string
+          description: The main content of the article.
+          example: This article provides an introduction to OpenAPI and its usage.
+        slug:
+          type: string
+          description: The SEO-friendly slug for the article.
+          example: getting-started-with-openapi
+        image:
+          type: string
+          description: The URL of the image associated with the article.
+          example: https://example.com/images/article.jpg
+        status:
+          type: string
+          description: The status of the article.
+          enum:
+            - draft
+            - published
+          example: published
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of tags associated with the article.
+          example:
+            - tutorial
+            - api
+        userId:
+          type: string
+          description: The ID of the user who created the article.
+          example: 123e4567-e89b-12d3-a456-426614174001
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - title
+        - content
+        - slug
+        - status
+        - tags
+        - userId
       additionalProperties: false
