@@ -266,16 +266,11 @@ paths:
                     description: A tag associated with the article.
                   example: [tutorial, api]
                   default: []
-                userId:
-                  type: string
-                  description: The ID of the user who created the article.
-                  example: 123e4567-e89b-12d3-a456-426614174001
               required:
                 - title
                 - content
                 - slug
                 - status
-                - userId
               additionalProperties: false
       responses:
         201:
