@@ -1,4 +1,6 @@
+const _ = require('lodash');
 const crytoHelper = require('../helpers/cryptoHelper');
+const errorCodes = require('../constants/errorCodes');
 const errorMessages = require('../constants/errorMessages');
 const responseHelper = require('../helpers/responseHelper');
 const userService = require('../services/userService');
@@ -28,4 +30,34 @@ const register = async (req, res) => {
   responseHelper.created(res, response);
 };
 
-module.exports = { register };
+/**
+ * Handler for POST /users/login
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+const login = async (req, res) => {
+  const payload = req.body;
+
+  if (!validator.isEmail(payload.email)) {
+    responseHelper.badRequest(res, errorMessages.EMAIL_FORMAT_INVALID);
+    return;
+  }
+
+  let user = await userService.findByEmail(payload.email, { raw: true });
+  if (!user) {
+    responseHelper.notFound(res, errorMessages.USER_NOT_FOUND, errorCodes.USER_NOT_FOUND);
+    return;
+  }
+
+  const areCredentialsCorrect = await crytoHelper.compare(payload.password, user.password);
+  if (!areCredentialsCorrect) {
+    responseHelper.badRequest(res, errorMessages.CREDENTIALS_INCORRECT);
+    return;
+  }
+
+  user = _.omit(user, 'password');
+  const response = await crytoHelper.sign(user);
+  responseHelper.ok(res, response);
+};
+
+module.exports = { register, login };
