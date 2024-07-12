@@ -1,4 +1,4 @@
-import Endpoints from './endpoints';
+import Endpoints from '../endpoints';
 import HttpClient from '../httpClient';
 
 const userService = {};
