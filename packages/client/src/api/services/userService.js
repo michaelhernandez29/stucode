@@ -12,6 +12,16 @@ const register = (data) => {
   return HttpClient.post(Endpoints.REGISTER, data);
 };
 
+/**
+ * Logsin a user with provided credentials.
+ * @param {object} credentials - The user's credentials.
+ * @returns {Promise} A promise resolving to the login response.
+ */
+const login = (credentials) => {
+  return HttpClient.post(Endpoints.LOGIN, credentials);
+};
+
 userService.register = register;
+userService.login = login;
 
 export default userService;

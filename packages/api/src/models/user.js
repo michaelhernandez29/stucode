@@ -4,7 +4,6 @@ const dbPostgres = require('../db/dbPostgres');
 /**
  * User model definition.
  * Represents a user in the application.
- *
  * @typedef {object} User
  * @property {string} id - The unique identifier for the user (UUIDv4).
  * @property {Date} createdAt - The date and time when the user was created.
