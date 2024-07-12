@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
-import { Alert, Box, Button, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  ThemeProvider,
+} from '@mui/material';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
+import theme from './theme';
+import Logo from '../../assets/images/logo.png';
 import UserService from '../../api/services/userService';
 
 function Register() {
@@ -32,91 +44,100 @@ function Register() {
   };
 
   return (
-    <Box sx={{ height: '100vh' }}>
-      <Grid container justifyContent="center" alignItems="center" sx={{ height: '100vh' }}>
-        <Grid item xs={11} md={6} lg={2}>
-          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleFormSubmit}>
-            {(props) => (
-              <Form onSubmit={props.handleSubmit}>
-                <TextField
-                  name="name"
-                  label="Name"
-                  placeholder="Enter your name"
-                  type="text"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.name}
-                  fullWidth
-                  required
-                  autoFocus
-                  error={props.touched.name && Boolean(props.errors.name)}
-                  helperText={props.touched.name && props.errors.name}
-                />
-                <TextField
-                  name="lastname"
-                  label="Lastname"
-                  placeholder="Enter your lastname"
-                  type="text"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.lastname}
-                  fullWidth
-                  required
-                  autoFocus
-                  error={props.touched.lastname && Boolean(props.errors.lastname)}
-                  helperText={props.touched.lastname && props.errors.lastname}
-                />
-                <TextField
-                  name="email"
-                  label="Email"
-                  placeholder="Enter your email"
-                  type="text"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.email}
-                  fullWidth
-                  required
-                  autoFocus
-                  error={props.touched.email && Boolean(props.errors.email)}
-                  helperText={props.touched.email && props.errors.email}
-                />
-                <TextField
-                  name="password"
-                  label="Password"
-                  placeholder="Enter your password"
-                  type={showPassword ? 'text' : 'password'}
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.password}
-                  fullWidth
-                  required
-                  autoFocus
-                  error={props.touched.password && Boolean(props.errors.password)}
-                  helperText={props.touched.password && props.errors.password}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={handleClickShowPassword} edge="end">
-                          {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                {error && (
-                  <Alert severity="error" sx={{ mb: 2 }}>
-                    {error}
-                  </Alert>
-                )}
-                <Button type="submit" variant="contained" color="primary" fullWidth disableElevation>
-                  Register
-                </Button>
-              </Form>
-            )}
-          </Formik>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ height: '100vh' }}>
+        <Grid container justifyContent="center" alignItems="center" sx={{ height: '100vh' }}>
+          <Grid item xs={11} md={6} lg={3}>
+            <img src={Logo} alt="StuCode logo" style={{ width: '100%' }} />
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleFormSubmit}>
+              {(props) => (
+                <Form onSubmit={props.handleSubmit}>
+                  <TextField
+                    name="name"
+                    label="Name"
+                    placeholder="Enter your name"
+                    type="text"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.name}
+                    fullWidth
+                    required
+                    autoFocus
+                    variant="standard"
+                    error={props.touched.name && Boolean(props.errors.name)}
+                    helperText={props.touched.name && props.errors.name}
+                    sx={{ mb: 1 }}
+                  />
+                  <TextField
+                    name="lastname"
+                    label="Lastname"
+                    placeholder="Enter your lastname"
+                    type="text"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.lastname}
+                    fullWidth
+                    required
+                    variant="standard"
+                    error={props.touched.lastname && Boolean(props.errors.lastname)}
+                    helperText={props.touched.lastname && props.errors.lastname}
+                    sx={{ mb: 1 }}
+                  />
+                  <TextField
+                    name="email"
+                    label="Email"
+                    placeholder="Enter your email"
+                    type="text"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.email}
+                    fullWidth
+                    required
+                    variant="standard"
+                    error={props.touched.email && Boolean(props.errors.email)}
+                    helperText={props.touched.email && props.errors.email}
+                    sx={{ mb: 1 }}
+                  />
+                  <TextField
+                    name="password"
+                    label="Password"
+                    placeholder="Enter your password"
+                    type={showPassword ? 'text' : 'password'}
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.password}
+                    fullWidth
+                    required
+                    variant="standard"
+                    error={props.touched.password && Boolean(props.errors.password)}
+                    helperText={props.touched.password && props.errors.password}
+                    sx={{ mb: 1 }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={handleClickShowPassword} edge="end">
+                            {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  {error && (
+                    <Alert severity="error" sx={{ mb: 2 }}>
+                      {error}
+                    </Alert>
+                  )}
+                  <Button type="submit" variant="contained" color="secondary" fullWidth disableElevation sx={{ mt: 3 }}>
+                    Register
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
 
