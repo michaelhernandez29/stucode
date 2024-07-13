@@ -7,7 +7,6 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import UserService from '../../../api/services/userService';
-import HttpClient from '../../../api/httpClient';
 
 function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
