@@ -60,4 +60,16 @@ const login = async (req, res) => {
   responseHelper.ok(res, response);
 };
 
-module.exports = { register, login };
+/**
+ * Handler for GET /users
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ */
+const findAndCountAll = async (req, res) => {
+  const filters = req.query;
+
+  const response = await userService.findAndCountAll(filters, { raw: true });
+  responseHelper.ok(res, response.rows, response.count);
+};
+
+module.exports = { register, login, findAndCountAll };
