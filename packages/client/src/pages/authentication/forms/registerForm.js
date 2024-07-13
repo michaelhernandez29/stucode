@@ -1,0 +1,123 @@
+import React, { useState } from 'react';
+
+import * as Yup from 'yup';
+import { Form, Formik } from 'formik';
+import { Alert, Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+import UserService from '../../../api/services/userService';
+import HttpClient from '../../../api/httpClient';
+
+function RegisterForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const initialValues = { name: '', lastname: '', email: '', password: '' };
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Name is required'),
+    lastname: Yup.string().required('Lastname is required'),
+    email: Yup.string().email('Enter a valid email').required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleFormSubmit = async (values) => {
+    try {
+      await UserService.register(values);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleFormSubmit}>
+      {(props) => (
+        <Form onSubmit={props.handleSubmit}>
+          <TextField
+            name="name"
+            label="Name"
+            placeholder="Enter your name"
+            type="text"
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.name}
+            fullWidth
+            required
+            autoFocus
+            variant="standard"
+            error={props.touched.name && Boolean(props.errors.name)}
+            helperText={props.touched.name && props.errors.name}
+            sx={{ mb: 1 }}
+          />
+          <TextField
+            name="lastname"
+            label="Lastname"
+            placeholder="Enter your lastname"
+            type="text"
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.lastname}
+            fullWidth
+            required
+            variant="standard"
+            error={props.touched.lastname && Boolean(props.errors.lastname)}
+            helperText={props.touched.lastname && props.errors.lastname}
+            sx={{ mb: 1 }}
+          />
+          <TextField
+            name="email"
+            label="Email"
+            placeholder="Enter your email"
+            type="text"
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.email}
+            fullWidth
+            required
+            variant="standard"
+            error={props.touched.email && Boolean(props.errors.email)}
+            helperText={props.touched.email && props.errors.email}
+            sx={{ mb: 1 }}
+          />
+          <TextField
+            name="password"
+            label="Password"
+            placeholder="Enter your password"
+            type={showPassword ? 'text' : 'password'}
+            onChange={props.handleChange}
+            onBlur={props.handleBlur}
+            value={props.values.password}
+            fullWidth
+            required
+            variant="standard"
+            error={props.touched.password && Boolean(props.errors.password)}
+            helperText={props.touched.password && props.errors.password}
+            sx={{ mb: 1 }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleClickShowPassword} edge="end">
+                    {showPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+          <Button type="submit" variant="contained" color="secondary" fullWidth disableElevation sx={{ mt: 3 }}>
+            Register
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+}
+
+export default RegisterForm;
