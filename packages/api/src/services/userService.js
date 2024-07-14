@@ -29,6 +29,16 @@ const findByEmail = async (email, params = null) => {
 };
 
 /**
+ * Finds a user by id.
+ * @param {string} id - The id of the user to find.
+ * @param {object?} [params=null] - Additional parameters for the query.
+ * @returns {Promise<object|null>} A promise that resolves with the user data if found, otherwise null.
+ */
+const findById = async (id, params = null) => {
+  return user.findOne({ where: { id }, attributes: { exclude: ['password'] }, ...params });
+};
+
+/**
  * Finds and counts all users based on provided filters.
  * @param {object} filters - Filters for querying users.
  * @param {object?} [params=null] - Additional parameters for the query.
@@ -61,6 +71,7 @@ const findAndCountAll = async (filters, params = null) => {
 
 userService.register = register;
 userService.findByEmail = findByEmail;
+userService.findById = findById;
 userService.findAndCountAll = findAndCountAll;
 
 module.exports = userService;
