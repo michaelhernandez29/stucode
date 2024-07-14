@@ -30,8 +30,18 @@ const findAndCountAll = (query) => {
   return HttpClient.get(`${Endpoints.USERS}${query}`);
 };
 
+/**
+ * Retrieves a user by their ID.
+ * @param {string} id - The ID of the user.
+ * @returns {Promise<object>} A promise that resolves to the user data.
+ */
+const findById = (id) => {
+  return HttpClient.get(`${Endpoints.USERS}/${id}`);
+};
+
 userService.register = register;
 userService.login = login;
 userService.findAndCountAll = findAndCountAll;
+userService.findById = findById;
 
 export default userService;

@@ -1,24 +1,20 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
-  Avatar,
   Box,
   CssBaseline,
   FormControl,
   Grid,
   InputLabel,
   List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   MenuItem,
   Select,
   TablePagination,
   TextField,
-  Typography,
 } from '@mui/material';
 
 import Filters from '../../api/filters';
+import UserCard from './userCard';
 import UserService from '../../api/services/userService';
 
 function Users() {
@@ -37,7 +33,6 @@ function Users() {
       }
 
       const response = await UserService.findAndCountAll(query);
-      console.log(response);
       setCount(response.count);
       setUsers(response.data);
     };
@@ -89,20 +84,7 @@ function Users() {
             </Box>
             <List sx={{ flexGrow: 1 }}>
               {users.map((user) => (
-                <ListItem key={user.id}>
-                  <ListItemAvatar>
-                    <Avatar />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={`${user.name} ${user.lastname}`}
-                    secondary={
-                      <Fragment>
-                        <Typography>{user.email}</Typography>
-                        <Typography>{user.biography}</Typography>
-                      </Fragment>
-                    }
-                  />
-                </ListItem>
+                <UserCard key={user.id} user={user} />
               ))}
             </List>
             <Box>

@@ -1,11 +1,13 @@
-import Login from './pages/authentication/login';
-import Register from './pages/authentication/register';
-import Users from './pages/users/users';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import routes from './routes';
+
+const router = createBrowserRouter(routes);
 
 function App() {
   return (
     <div className="App">
-      <Users />
+      <RouterProvider router={router} />
     </div>
   );
 }
