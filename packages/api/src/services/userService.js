@@ -80,10 +80,20 @@ const updateById = async (id, data) => {
   return response[1][0].get({ plain: true });
 };
 
+/**
+ * Deletes a user by id.
+ * @param {string} id - The id of the user to delete.
+ * @returns {Promise<void>} A promise that resolves when the user is deleted.
+ */
+const deleteById = async (id) => {
+  await user.destroy({ where: { id } });
+};
+
 userService.register = register;
 userService.findByEmail = findByEmail;
 userService.findById = findById;
 userService.findAndCountAll = findAndCountAll;
 userService.updateById = updateById;
+userService.deleteById = deleteById;
 
 module.exports = userService;
