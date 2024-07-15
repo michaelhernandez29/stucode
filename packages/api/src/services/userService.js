@@ -69,9 +69,21 @@ const findAndCountAll = async (filters, params = null) => {
   });
 };
 
+/**
+ * Updates a user by id.
+ * @param {string} id - The id of the user to update.
+ * @param {object} data - The new data to update the user with.
+ * @returns {Promise<object>} A promise that resolves with the updated user data.
+ */
+const updateById = async (id, data) => {
+  const response = await user.update(data, { where: { id }, returning: true });
+  return response[1][0].get({ plain: true });
+};
+
 userService.register = register;
 userService.findByEmail = findByEmail;
 userService.findById = findById;
 userService.findAndCountAll = findAndCountAll;
+userService.updateById = updateById;
 
 module.exports = userService;
