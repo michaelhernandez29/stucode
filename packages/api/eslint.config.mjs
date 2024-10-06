@@ -26,6 +26,13 @@ const jsdocRules = {
   'jsdoc/check-types': 'error',
 };
 
+const nodeRules = {
+  'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  'no-console': ['error'],
+  'node/no-unsupported-features/es-syntax': 'off',
+  'node/no-missing-import': 'off',
+};
+
 export default [
   {
     languageOptions: { globals: globals.node },
@@ -35,6 +42,7 @@ export default [
     },
     rules: {
       ...jsdocRules,
+      ...nodeRules,
     },
   },
   pluginJs.configs.recommended,
