@@ -1,0 +1,35 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Michael Hernandez <michaelhernandezrala@gmail.com>",
+  "homepage": "https://github.com/michaelhernandez29/stucode#readme",
+  "license": "MIT",
+  "main": "lib/api.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelhernandez29/stucode.git"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "bugs": {
+    "url": "https://github.com/michaelhernandez29/stucode/issues"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.12.0",
+    "eslint": "^9.12.0",
+    "eslint-plugin-jsdoc": "^50.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "globals": "^15.10.0"
+  }
+}
