@@ -52,3 +52,46 @@
         $ref: '#/components/responses/Conflict'
       500:
         $ref: '#/components/responses/InternalServerError'
+
+/users/login:
+  post:
+    tags:
+      - Users 🧑‍💻
+    summary: User login
+    description: Authenticates a user with the provided email and password.
+    operationId: login
+    x-eov-operation-handler: authController
+    requestBody:
+      description: User login data
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+                format: email
+                description: The email address of the user.
+                example: john.doe@example.com
+              password:
+                type: string
+                format: password
+                description: The password for the user account.
+                example: Password123!
+    responses:
+      200:
+        $ref: '#/components/responses/UserLogged'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

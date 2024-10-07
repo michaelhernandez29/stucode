@@ -21,3 +21,29 @@ UserRegistered:
           - message
           - data
         additionalProperties: false
+
+UserLogged:
+  description: OK
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating a successful operation.
+            default: 200
+          message:
+            type: string
+            description: Descriptive message of the operation.
+            default: OK
+          data:
+            type: string
+            description: The JWT token for authenticated access.
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        required:
+          - statusCode
+          - message
+          - data
+        additionalProperties: false
