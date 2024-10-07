@@ -1,4 +1,5 @@
 import pluginJs from '@eslint/js';
+import pluginJsdoc from 'eslint-plugin-jsdoc';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
 
@@ -35,7 +36,12 @@ const nodeRules = {
 export default [
   { files: ['**/*.{js,mjs,cjs,jsx}'] },
   {
-    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
+    plugins: {
+      jsdoc: pluginJsdoc,
+    },
   },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,

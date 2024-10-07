@@ -1,0 +1,54 @@
+/users/register:
+  post:
+    tags:
+      - Users 🧑‍💻
+    summary: Register a new user
+    description: Registers a new user in the application with the provided details.
+    operationId: register
+    x-eov-operation-handler: authController
+    requestBody:
+      description: User registration data
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - firstname
+              - lastname
+              - email
+              - password
+            properties:
+              firstname:
+                type: string
+                description: The first name of the user.
+                example: John
+              lastname:
+                type: string
+                description: The last name of the user.
+                example: Doe
+              email:
+                type: string
+                format: email
+                description: The email address of the user.
+                example: john.doe@example.com
+              password:
+                type: string
+                format: password
+                description: The password for the user account. It must be at least 8 characters long and contain at least one number and one special character.
+                example: Password123!
+    responses:
+      201:
+        $ref: '#/components/responses/UserRegistered'
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      409:
+        $ref: '#/components/responses/Conflict'
+      500:
+        $ref: '#/components/responses/InternalServerError'

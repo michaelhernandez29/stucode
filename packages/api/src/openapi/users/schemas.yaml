@@ -1,0 +1,55 @@
+User:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The user's id.
+      example: 123e4567-e89b-12d3-a456-426614174000
+    firstname:
+      type: string
+      description: The user's first name.
+      example: John
+    lastname:
+      type: string
+      description: The user's last name.
+      example: Doe
+    email:
+      type: string
+      description: The user's email address.
+      example: john@example.com
+    job:
+      type: string
+      description: The user's job title or position.
+      nullable: true
+      example: Global Accounts Engineer
+    biography:
+      type: string
+      description: A brief description or biography of the user.
+      nullable: true
+      example: JavaScript advocate, veteran
+    createdAt:
+      type: string
+      format: date-time
+      description: The date the user was created.
+      example: 2023-07-11T13:45:30Z
+    updatedAt:
+      type: string
+      format: date-time
+      description: The date the user was last updated.
+      example: 2024-07-11T13:45:30Z
+    image:
+      type: string
+      description: The user's logo URL.
+      nullable: true
+      example: https://example.com/images/user.jpg
+  required:
+    - id
+    - firstname
+    - lastname
+    - email
+    - job
+    - biography
+    - createdAt
+    - updatedAt
+    - image
+  additionalProperties: false

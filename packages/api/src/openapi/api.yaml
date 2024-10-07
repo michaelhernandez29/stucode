@@ -2,21 +2,31 @@ openapi: 3.0.0
 info:
   title: StuCode API
   description: |
-    RacketOnDeck is a versatile platform designed to streamline the management of padel academies.
+    StuCode is a versatile platform for publishing and discovering programming articles, empowering developers to
+    share knowledge, collaborate, and grow together.
 
-    From handling user accounts to managing court bookings, RacketOnDeck provides a comprehensive suite of tools to
-    enhance the efficiency and experience of both academy staff and players. 🎾🏆📅
+    With a rich feature set that includes article creation, community engagement, and personalized user experiences,
+    StuCode is the go-to place for developers to publish their ideas, learn new concepts, and connect with
+    like-minded individuals. Whether you're a seasoned professional or a beginner, StuCode offers the tools you
+    need to create, follow, and contribute to the developer community. 🚀🖋️💻
+
+    Key features include:
+    - **Article Management**: Create, edit, and publish articles effortlessly with a robust content editor.
+    - **Community Engagement**: Interact with other developers through comments, likes, and sharing features.
+    - **Personalized Experience**: Follow topics, receive recommendations, and customize your feed based on your interests.
+    - **Developer Growth**: Access tutorials, insights, and coding challenges to enhance your skills.
   version: 1.0.0
 servers:
   - url: /v1
 tags:
-  - name: Accounts 📝
-    description: Operations related to managing user accounts.
+  - name: Users 🧑‍💻
+    description: |
+      Endpoints for managing users, including registration, profile updates, and user interactions such as following other developers and managing personal settings.
 
 paths:
-  !!inc/dir ['.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'requestBodies', 'responses'] }]
+  !!inc/dir [ '.', { whitelist: 'paths', blacklist: ['api', 'schemas', 'requestBodies', 'responses'] }]
 components:
   schemas:
-    !!inc/dir ['.', { whitelist: 'schemas', blacklist: ['api', 'paths', 'requestBodies', 'responses'] }]
+    !!inc/dir [ '.', { whitelist: 'schemas', blacklist: ['api', 'paths', 'requestBodies', 'responses'] }]
   responses:
-    !!inc/dir ['.', { whitelist: 'responses', blacklist: ['api', 'paths', 'schemas', 'requestBodies'] }]
+    !!inc/dir [ '.', { whitelist: 'responses', blacklist: ['api', 'paths', 'schemas', 'requestBodies']}]

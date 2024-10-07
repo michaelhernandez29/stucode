@@ -1,0 +1,23 @@
+UserRegistered:
+  description: Created
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+            format: int64
+            description: HTTP status code indicating a successful operation.
+            default: 201
+          message:
+            type: string
+            description: Descriptive message of the operation.
+            default: Created
+          data:
+            $ref: '#/components/schemas/User'
+        required:
+          - statusCode
+          - message
+          - data
+        additionalProperties: false
