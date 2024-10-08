@@ -120,7 +120,7 @@
         schema:
           type: integer
           format: int64
-          default: 20
+          default: 10
       - name: find
         in: query
         description: A search term to filter results.
