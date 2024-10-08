@@ -187,3 +187,53 @@
         $ref: '#/components/responses/Conflict'
       500:
         $ref: '#/components/responses/InternalServerError'
+
+/users/{userId}:
+  get:
+    tags:
+      - Users 🧑‍💻
+    summary: Retrieve a user's details
+    description: Fetches the detailed information of a user based on their unique identifier.
+    operationId: findById
+    x-eov-operation-handler: userController
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        description: The unique identifier of the user to be retrieved.
+        schema:
+          type: string
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: integer
+                  format: int64
+                  description: HTTP status code indicating a successful operation.
+                  default: 200
+                message:
+                  type: string
+                  description: Descriptive message of the operation.
+                  default: User details retrieved successfully
+                data:
+                  $ref: '#/components/schemas/User'
+              required:
+                - statusCode
+                - message
+                - data
+              additionalProperties: false
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      500:
+        $ref: '#/components/responses/InternalServerError'

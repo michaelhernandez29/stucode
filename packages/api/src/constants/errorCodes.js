@@ -10,6 +10,7 @@ export default {
 
   // 404
   NOT_FOUND: 'NOT_FOUND',
+  USER_NOT_FOUND: 'USER_NOT_FOUND',
 
   // 409
   CONFLICT: 'CONFLICT',

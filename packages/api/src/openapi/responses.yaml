@@ -153,10 +153,12 @@ NotFound:
             type: string
             enum:
               - NOT_FOUND
+              - USER_NOT_FOUND
             description: >
               Possible error codes:
 
               - `NOT_FOUND`: Indicates a not found error.'
+              - `USER_NOT_FOUND`: Indicates a user is not found.
         required:
           - statusCode
           - message
