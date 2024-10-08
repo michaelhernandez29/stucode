@@ -1,3 +1,6 @@
+import _ from 'lodash-es';
+import { Op } from 'sequelize';
+
 import user from '../models/user.js';
 
 /**
@@ -24,4 +27,36 @@ const findByEmail = async (email, params = null) => {
   return user.findOne({ where: { email }, ...params });
 };
 
-export default { register, findByEmail };
+/**
+ * Finds and counts all users based on provided filters.
+ *
+ * @param {object} filters - Filters for querying users.
+ * @param {object?} [params=null] - Additional parameters for the query.
+ * @returns {Promise<object>} A promise that resolves to an object containing the count of users and
+ * the paginated list of users.
+ */
+const findAndCountAll = async (filters, params = null) => {
+  const { page, limit, find, order } = filters;
+  let orderClause = [['firstname', 'ASC']];
+  const offset = page * limit;
+  const where = {};
+
+  if (!_.isNil(find)) {
+    where[Op.or] = [{ firstname: { [Op.iLike]: `%${find}%` } }, { email: { [Op.iLike]: `%${find}%` } }];
+  }
+
+  if (order === 'z-a') {
+    orderClause = [['firstname', 'DESC']];
+  }
+
+  return user.findAndCountAll({
+    where,
+    order: orderClause,
+    offset,
+    limit,
+    attributes: { exclude: ['password'] },
+    ...params,
+  });
+};
+
+export default { register, findByEmail, findAndCountAll };

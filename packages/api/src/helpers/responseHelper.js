@@ -16,12 +16,12 @@ const ok = (res, data = null, count = null) => {
     message: ReasonPhrases.OK,
   };
 
-  if (!_.isNil(data)) {
-    response.data = data;
-  }
-
   if (!_.isNil(count)) {
     response.count = count;
+  }
+
+  if (!_.isNil(data)) {
+    response.data = data;
   }
 
   res.status(response.statusCode).json(response);

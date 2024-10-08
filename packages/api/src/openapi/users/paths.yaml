@@ -95,3 +95,95 @@
         $ref: '#/components/responses/NotFound'
       500:
         $ref: '#/components/responses/InternalServerError'
+
+/users:
+  get:
+    tags:
+      - Users 🧑‍💻
+    summary: Retrieve a list of users
+    description: Fetches a paginated list of users registered in the platform. You can use filters like search terms, pagination, and ordering to refine the results.
+    operationId: findAndCountAll
+    x-eov-operation-handler: userController
+    parameters:
+      - name: page
+        in: query
+        description: The page number for pagination.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: limit
+        in: query
+        description: The limit of results per page.
+        required: false
+        schema:
+          type: integer
+          format: int64
+          default: 20
+      - name: find
+        in: query
+        description: A search term to filter results.
+        required: false
+        schema:
+          type: string
+          default: ''
+        allowReserved: true
+      - name: order
+        in: query
+        description: >
+          Order of the results:
+
+            - `a-z` - Order by firstname ascending. From A to Z
+            - `z-a` - Order by firstname descending. From Z to A
+        required: false
+        schema:
+          type: string
+          enum:
+            - a-z
+            - z-a
+          default: a-z
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                statusCode:
+                  type: integer
+                  format: int64
+                  description: HTTP status code indicating a successful operation.
+                  default: 200
+                message:
+                  type: string
+                  description: Descriptive message of the operation.
+                  default: OK
+                count:
+                    type: integer
+                    format: int64
+                    description: The total number of users found.
+                    default: 1
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+              required:
+                - statusCode
+                - message
+                - count
+                - data
+              additionalProperties: false
+      400:
+        $ref: '#/components/responses/BadRequest'
+      401:
+        $ref: '#/components/responses/Unauthorized'
+      403:
+        $ref: '#/components/responses/Forbidden'
+      404:
+        $ref: '#/components/responses/NotFound'
+      409:
+        $ref: '#/components/responses/Conflict'
+      500:
+        $ref: '#/components/responses/InternalServerError'
