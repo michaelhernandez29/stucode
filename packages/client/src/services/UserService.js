@@ -15,4 +15,14 @@ const findAndCountAll = async (query = {}) => {
   return HttpClient.get(Endpoints.USERS, { params: query });
 };
 
-export default { findAndCountAll };
+/**
+ * Retrieves a user's details by their ID.
+ *
+ * @param {string} id - The unique identifier of the user to be retrieved.
+ * @returns {Promise<object>} A promise that resolves to the user object if found.
+ */
+const findById = async (id) => {
+  return HttpClient.get(Endpoints.USERS + `/${id}`);
+};
+
+export default { findAndCountAll, findById };
